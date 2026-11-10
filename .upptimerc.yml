@@ -1,0 +1,53 @@
+# Apphive (SL) Limited status page: https://status.apphivesl.com
+# Design and rules: RFC 013 (docs/rfc/013-public-status-page-and-service-levels.md in sms_core).
+# Never name a provider, carrier, route or gateway here: component names and incident text are public.
+owner: ApphiveSL
+repo: status_page
+
+# Phase 1: external checks from GitHub Actions every 5 minutes.
+# Phase 2 adds "SMS delivery", "OTP delivery", "Bulk messaging" and "SMPP" from
+# https://api.apphivesl.com/status/summary (measured from clients' real traffic).
+sites:
+  - name: SMS API
+    slug: sms-api
+    url: https://api.apphivesl.com/health
+    expectedStatusCodes: [200]
+    maxResponseTime: 5000
+  - name: Customer portal
+    slug: customer-portal
+    url: https://sms.apphivesl.com/health
+    expectedStatusCodes: [200]
+    maxResponseTime: 5000
+  - name: AI connector
+    slug: ai-connector
+    url: https://mcp.apphivesl.com/health
+    expectedStatusCodes: [200]
+    maxResponseTime: 5000
+  - name: Website
+    slug: website
+    url: https://apphivesl.com
+    expectedStatusCodes: [200]
+    maxResponseTime: 8000
+
+status-website:
+  cname: status.apphivesl.com
+  logoUrl: https://apphivesl.com/assets/images/logo.png
+  favicon: https://apphivesl.com/assets/images/logo.png
+  name: Apphive Status
+  introTitle: "Apphive service status"
+  introMessage: Live status of the Apphive SMS platform, checked automatically every 5 minutes from outside our network. Incidents open and close on their own when a check fails or recovers.
+  theme: light
+  customHeadHtml: <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  css: "body,button,input{font-family:'Plus Jakarta Sans',system-ui,sans-serif} a{color:#ea580c} nav a.active,nav a[aria-current]{color:#f97316}"
+  navbar:
+    - title: Status
+      href: /
+    - title: Website
+      href: https://apphivesl.com
+    - title: Support
+      href: https://apphivesl.com/contact
+
+i18n:
+  up: Operational
+  down: Down
+  degraded: Degraded
