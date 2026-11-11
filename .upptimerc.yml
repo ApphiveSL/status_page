@@ -125,7 +125,9 @@ status-website:
     footer a{color:var(--text-muted);text-decoration:none}footer a:hover{color:var(--primary)}
     input,textarea,select{background:var(--bg-card);color:var(--text-main);border:1px solid var(--border-card);border-radius:8px}
     ::selection{background:rgba(249,115,22,.3)}
-    @media (max-width:640px){nav .container{flex-wrap:wrap;padding:8px 16px}nav ul{flex-wrap:wrap;justify-content:flex-start}
+    @media (max-width:640px){nav .container{flex-wrap:wrap;padding:10px 16px 0;gap:8px}nav .container>div{order:1}#ah-theme{order:2;margin-left:auto}
+    nav ul{order:3;width:100%;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:8px!important;scrollbar-width:none}nav ul::-webkit-scrollbar{display:none}
+    nav ul a{padding:6px 12px!important}nav{margin-bottom:40px!important}
     nav a.logo{font-size:1.15rem}.container{padding:0 16px}main>header::before{font-size:.75rem}}
   navbar:
     - title: Status
