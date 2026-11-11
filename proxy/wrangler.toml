@@ -7,3 +7,8 @@ workers_dev = true
 
 [vars]
 ALLOWED_ORIGINS = "https://status.apphivesl.com"
+
+# Backup copy of the last good GitHub answers, written at most every 10 minutes per URL.
+[[kv_namespaces]]
+binding = "STALE"
+id = "766ed8d1338a488ca1e1be62affe60bc"

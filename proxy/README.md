@@ -4,7 +4,8 @@ Cloudflare Worker that answers the status page's GitHub API reads from a shared 
 never hit GitHub's 60-requests-per-hour-per-IP limit (the "Rate limit exceeded" page).
 
 - Only `GET` reads of this repo's issues, comments, commits and contents; everything else is refused.
-- One upstream call per URL per minute, sent with our token; if GitHub fails, the last good copy
+- One upstream call per URL per minute (kept in memory; the Cache API is a no-op on workers.dev), sent
+  with our token. A backup copy goes to KV `STALE` at most every 10 minutes per URL; if GitHub fails, the last good copy
   (kept 24 h) is served instead of an error.
 - CORS only for https://status.apphivesl.com.
 
@@ -17,4 +18,5 @@ npx wrangler@3.80.0 secret put GITHUB_TOKEN  # once: fine-grained token, public 
 npx wrangler@3.80.0 deploy
 ```
 
-Then set `status-website.apiBaseUrl` in `.upptimerc.yml` to the Worker's URL.
+Live at https://apphive-status-proxy.apptell-sl.workers.dev (account apptell.sl@gmail.com). Then set
+`status-website.apiBaseUrl` in `.upptimerc.yml` to that URL.
