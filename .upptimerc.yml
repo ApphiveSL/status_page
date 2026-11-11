@@ -35,6 +35,8 @@ sites:
 
 status-website:
   cname: status.apphivesl.com
+  # GitHub API reads go through our cached proxy (proxy/), so visitors never hit GitHub's per-IP limit.
+  apiBaseUrl: https://apphive-status-proxy.apptell-sl.workers.dev
   logoUrl: https://apphivesl.com/assets/images/logo.png
   logoHref: https://status.apphivesl.com
   favicon: https://apphivesl.com/assets/images/logo.png
