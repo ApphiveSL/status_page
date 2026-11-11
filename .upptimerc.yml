@@ -10,21 +10,25 @@ repo: status_page
 sites:
   - name: SMS API
     slug: sms-api
+    icon: https://apphivesl.com/assets/images/logo.png
     url: https://api.apphivesl.com/health
     expectedStatusCodes: [200]
     maxResponseTime: 5000
   - name: Customer portal
     slug: customer-portal
+    icon: https://apphivesl.com/assets/images/logo.png
     url: https://sms.apphivesl.com/health
     expectedStatusCodes: [200]
     maxResponseTime: 5000
   - name: AI connector
     slug: ai-connector
+    icon: https://apphivesl.com/assets/images/logo.png
     url: https://mcp.apphivesl.com/health
     expectedStatusCodes: [200]
     maxResponseTime: 5000
   - name: Website
     slug: website
+    icon: https://apphivesl.com/assets/images/logo.png
     url: https://apphivesl.com
     expectedStatusCodes: [200]
     maxResponseTime: 8000
@@ -103,6 +107,12 @@ status-website:
     article div{color:var(--text-secondary);font-size:.9rem}
     article .data{color:var(--text-main);font-weight:600}
     article.down-active{background:var(--down-background-color)!important}
+    /* Response-time graphs: Upptime draws them teal; tint to the Apphive orange behind the text */
+    article.graph{background-image:none!important;position:relative;overflow:hidden;isolation:isolate}
+    article.graph::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--background) no-repeat right center/contain;
+    filter:hue-rotate(205deg) saturate(2.2) brightness(1.05);opacity:.3}
+    html[data-theme=light] article.graph::before{opacity:.22}
+    article .icon{border-radius:3px}
     .tag{border-radius:9999px!important;padding:3px 10px!important;font-weight:600;font-size:.72rem!important;letter-spacing:.02em}
     /* Period switcher as a pill group */
     .f.changed{margin:48px 0 16px;gap:12px}
@@ -132,4 +142,5 @@ i18n:
   down: Down
   degraded: Degraded
   liveStatus: Live status
+  allSystemsOperational: All systems operational
   footer: "© Apphive (SL) Limited · 14B Wilkinson Road, Freetown · [apphivesl.com](https://apphivesl.com) · [Contact](https://apphivesl.com/contact)"
