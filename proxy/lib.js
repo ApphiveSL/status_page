@@ -5,7 +5,7 @@ export const ALLOWED_RESOURCES = /^(issues(\/\d+(\/comments)?)?|commits|contents
 export const ALLOWED_PARAMS = new Set(["state", "filter", "sort", "direction", "labels", "per_page", "page", "since", "path", "sha"]);
 export const FRESH_SECONDS = 60;          // how long visitors share one copy
 export const STALE_SECONDS = 24 * 3600;   // fallback copy served when GitHub fails
-export const PASS_HEADERS = ["content-type", "link", "etag", "last-modified"];
+export const PASS_HEADERS = ["content-type", "link", "etag", "last-modified", "x-ratelimit-limit"]; // limit 5000 = our token is in use
 
 /** The canonical GitHub API URL for a request, or null if this proxy must refuse it. */
 export function upstreamUrl(requestUrl) {
