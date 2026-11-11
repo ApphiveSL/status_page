@@ -106,3 +106,17 @@ test("pagination links point back at the proxy, not at GitHub", async () => {
   const r = await worker.fetch(get("/issues?labels=status"), baseEnv, null, { fetch: f, memory: new Map() });
   assert.equal(r.headers.get("link"), '<https://proxy.example/repos/ApphiveSL/status_page/issues?page=2>; rel="next"');
 });
+
+test("iPhone preflight asking for user-agent is approved (Octokit sets it on WebKit)", async () => {
+  const pre = await worker.fetch(new Request(P + "/issues?labels=status", { method: "OPTIONS", headers: {
+    origin: "https://status.apphivesl.com", "access-control-request-method": "GET", "access-control-request-headers": "user-agent" } }), baseEnv, null, {});
+  assert.equal(pre.status, 204);
+  assert.match(pre.headers.get("access-control-allow-headers"), /user-agent/);
+});
+
+test("preflight echoes other requested headers but not junk", async () => {
+  const ok = await worker.fetch(new Request(P + "/issues", { method: "OPTIONS", headers: { origin: "https://status.apphivesl.com", "access-control-request-headers": "x-custom-thing" } }), baseEnv, null, {});
+  assert.match(ok.headers.get("access-control-allow-headers"), /x-custom-thing/);
+  const bad = await worker.fetch(new Request(P + "/issues", { method: "OPTIONS", headers: { origin: "https://status.apphivesl.com", "access-control-request-headers": "a;b<script>" } }), baseEnv, null, {});
+  assert.doesNotMatch(bad.headers.get("access-control-allow-headers"), /script/);
+});

@@ -27,7 +27,7 @@ export default {
     const now = (deps.now || Date.now)();
     const kv = env.STALE;
     const origins = (env.ALLOWED_ORIGINS || "https://status.apphivesl.com").split(",").map(s => s.trim());
-    const cors = corsHeaders(request.headers.get("origin") || "", origins);
+    const cors = corsHeaders(request.headers.get("origin") || "", origins, request.headers.get("access-control-request-headers") || "");
 
     if (request.method === "OPTIONS") return respond(null, 204, {}, cors);
     if (request.method !== "GET") return respond("Method not allowed", 405, { "content-type": "text/plain" }, cors);

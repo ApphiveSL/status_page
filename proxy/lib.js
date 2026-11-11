@@ -23,13 +23,22 @@ export function upstreamUrl(requestUrl) {
   return `https://api.github.com${url.pathname}${qs ? "?" + qs : ""}`;
 }
 
-export function corsHeaders(origin, allowedOrigins) {
+const BASE_ALLOWED_HEADERS = "accept, content-type, user-agent, x-github-api-version, if-none-match";
+
+/**
+ * CORS for the status site. The allowed request headers echo what the browser asks for: on iOS
+ * (Safari and Chrome, both WebKit) Octokit sets its own user-agent header, which forces a preflight,
+ * and a missing header there makes the browser drop the request. Echoing is safe because the proxy
+ * ignores incoming headers and only serves GET reads.
+ */
+export function corsHeaders(origin, allowedOrigins, requestedHeaders = "") {
   const allow = allowedOrigins.includes(origin) ? origin : allowedOrigins[0];
+  const asked = /^[A-Za-z0-9 ,_-]{1,300}$/.test(requestedHeaders || "") ? requestedHeaders : "";
   return {
     "access-control-allow-origin": allow,
     "access-control-allow-methods": "GET, OPTIONS",
-    "access-control-allow-headers": "accept, content-type, x-github-api-version, if-none-match",
+    "access-control-allow-headers": asked ? `${BASE_ALLOWED_HEADERS}, ${asked}` : BASE_ALLOWED_HEADERS,
     "access-control-max-age": "86400",
-    "vary": "origin",
+    "vary": "origin, access-control-request-headers",
   };
 }
