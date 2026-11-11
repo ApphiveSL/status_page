@@ -1,0 +1,9 @@
+# Cached GitHub API proxy for status.apphivesl.com. Deploy: npx wrangler deploy (from this folder).
+# Secret (set once, never committed): npx wrangler secret put GITHUB_TOKEN
+name = "apphive-status-proxy"
+main = "worker.js"
+compatibility_date = "2024-09-23"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://status.apphivesl.com"

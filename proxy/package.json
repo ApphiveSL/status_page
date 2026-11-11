@@ -1,0 +1,6 @@
+{
+  "name": "apphive-status-proxy",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test test/" }
+}

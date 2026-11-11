@@ -123,6 +123,7 @@ status-website:
     /* Footer */
     footer{opacity:1!important;margin-top:80px!important;padding:32px 24px 0;border-top:1px solid var(--border-glass);color:var(--text-dim);font-size:.85rem}
     footer a{color:var(--text-muted);text-decoration:none}footer a:hover{color:var(--primary)}
+    main form:not(.r){display:none!important}
     input,textarea,select{background:var(--bg-card);color:var(--text-main);border:1px solid var(--border-card);border-radius:8px}
     ::selection{background:rgba(249,115,22,.3)}
     @media (max-width:640px){nav .container{flex-wrap:wrap;padding:10px 16px 0;gap:8px}nav .container>div{order:1}#ah-theme{order:2;margin-left:auto}
@@ -146,4 +147,11 @@ i18n:
   degraded: Degraded
   liveStatus: Live status
   allSystemsOperational: All systems operational
+  rateLimitExceededTitle: Status temporarily unavailable
+  rateLimitExceededIntro: "We couldn't load the latest status just now. Please try again in a few minutes. If you need help urgently, [contact us](https://apphivesl.com/contact)."
+  rateLimitExceededWhatDoesErrorMean: " "
+  rateLimitExceededErrorMeaning: " "
+  rateLimitExceededErrorHowCanFix: " "
+  rateLimitExceededErrorFix: " "
+  rateLimitExceededGeneratePAT: " "
   footer: "© Apphive (SL) Limited · 14B Wilkinson Road, Freetown · [apphivesl.com](https://apphivesl.com) · [Contact](https://apphivesl.com/contact)"
