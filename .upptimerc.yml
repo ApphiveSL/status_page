@@ -110,7 +110,7 @@ status-website:
     /* Response-time graphs: Upptime draws them teal; tint to the Apphive orange behind the text */
     article.graph{background-image:none!important;position:relative;overflow:hidden;isolation:isolate}
     article.graph::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--background) no-repeat right center/contain;
-    filter:hue-rotate(205deg) saturate(2.2) brightness(1.05);opacity:.3}
+    filter:hue-rotate(205deg) saturate(2.4) brightness(1.15);opacity:.24}
     html[data-theme=light] article.graph::before{opacity:.22}
     article .icon{border-radius:3px}
     .tag{border-radius:9999px!important;padding:3px 10px!important;font-weight:600;font-size:.72rem!important;letter-spacing:.02em}
@@ -128,6 +128,7 @@ status-website:
     @media (max-width:640px){nav .container{flex-wrap:wrap;padding:10px 16px 0;gap:8px}nav .container>div{order:1}#ah-theme{order:2;margin-left:auto}
     nav ul{order:3;width:100%;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding-bottom:8px!important;scrollbar-width:none}nav ul::-webkit-scrollbar{display:none}
     nav ul a{padding:6px 12px!important}nav{margin-bottom:40px!important}
+    .f.changed{flex-direction:column;align-items:flex-start}article.graph::before{background-size:55% auto;opacity:.14}
     nav a.logo{font-size:1.15rem}.container{padding:0 16px}main>header::before{font-size:.75rem}}
   navbar:
     - title: Status
